@@ -8,9 +8,6 @@ use ieee.numeric_std.all;
 use work.conf.all;
 
 entity alu is
-    generic (
-        constant memwidth : integer := 32
-    );
     port (
         data_i0,data_i1: in std_logic_vector(memwidth-1 downto 0);
         alu_ctrl : in alu_opcode;
@@ -21,5 +18,44 @@ end alu;
 architecture behav of alu is
 
 begin
-
+    process(data_i0,data_i1,alu_ctrl)
+        variable d0,d1 : unsigned(memwidth-1 downto 0);
+    begin
+        d0 := unsigned(data_i0);
+        d1 := unsigned(data_i1);
+        case alu_ctrl is
+        
+            when add =>
+                data_o <= std_logic_vector(d0+d1);
+            when sub =>
+                data_o <= std_logic_vector(d0-d1);
+            when andd =>
+                data_o <= data_i0 and data_i1;
+            when orr =>
+                data_o <= data_i0 or data_i1;
+            when xorr =>
+                data_o <= data_i0 xor data_i1;
+            when slt =>
+                if signed(data_i0) < signed(data_i1) then
+                    data_o <= (0 => '1', others => '0');
+                else
+                    data_o <= (others => '0');
+                end if;
+            when sltu =>
+                if d0 < d1 then
+                    data_o <= (0 => '1', others => '0');
+                else
+                    data_o <= (others => '0');
+                end if;
+            when slll =>    --data 0 shift left by lower 5 bits of data 1
+                data_o <= data_i0 sll unsigned(data_i1(4 downto 0));
+            when srll =>
+                data_o <= data_i0 srl unsigned(data_i1(4 downto 0));
+            when sraa =>
+                data_o <= data_i0 srl unsigned(data_i1(4 downto 0));
+            when others =>
+                data_o <= (others => '1');
+        end case;
+    end process;
+    
 end architecture;

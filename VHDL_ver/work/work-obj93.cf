@@ -1,6 +1,0 @@
-v 4
-file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "conf.vhd" "368e7d1e19565a6a50a9998ed9bc6535e5fa6776" "20210425103259.037":
-  package conf at 3( 11) + 0 on 15;
-file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "ALU.vhd" "2db76f6ddd1e5dc8e2960cfc3fe4c2da6a5165c8" "20210425103259.037":
-  entity alu at 5( 126) + 0 on 0;
-  architecture behav of alu at 21( 480) + 0 on 0;
