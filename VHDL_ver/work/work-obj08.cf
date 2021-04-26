@@ -1,4 +1,9 @@
 v 4
-file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "ALU.vhd" "001f21b1be0bd3156a996bbcadac3fd4cce324ec" "20210425191125.860":
+file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "./testbench/ALU_tb.vhd" "b69a337172d48f4925dd656523d936cf86f8eb0a" "20210426193657.691":
+  entity alu_tb at 1( 0) + 0 on 4;
+  architecture sim of alu_tb at 17( 226) + 0 on 4;
+file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "ALU.vhd" "5cc78188888f70d358cb5ce9b2ed9cc91cab615a" "20210426193657.690":
   entity alu at 5( 126) + 0 on 4;
-  architecture behav of alu at 18( 417) + 0 on 4;
+  architecture behav of alu at 19( 441) + 0 on 4;
+file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "conf.vhd" "cf8e5bc0c1f3d1acbfe870c748d4d412cfa627b5" "20210426193657.690":
+  package conf at 2( 10) + 0 on 4;
