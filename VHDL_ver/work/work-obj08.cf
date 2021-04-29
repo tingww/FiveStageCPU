@@ -1,9 +1,12 @@
 v 4
-file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "./testbench/ALU_tb.vhd" "b69a337172d48f4925dd656523d936cf86f8eb0a" "20210426193657.691":
-  entity alu_tb at 1( 0) + 0 on 4;
-  architecture sim of alu_tb at 17( 226) + 0 on 4;
-file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "ALU.vhd" "5cc78188888f70d358cb5ce9b2ed9cc91cab615a" "20210426193657.690":
+file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "./testbench/mux_tb.vhd" "f4992e9038d8f409eb4ee17a2064cedaf98ff276" "20210429115109.960":
+  entity mux_tb at 1( 0) + 0 on 4;
+  architecture sim of mux_tb at 14( 185) + 0 on 4;
+file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "mux.vhd" "f9dfbb4bba5265b85a12872e27127e6999401233" "20210429115109.959":
+  entity mux at 1( 0) + 0 on 4;
+  architecture behav of mux at 19( 389) + 0 on 4;
+file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "conf.vhd" "eff5a1ae6a67e0d8fd3fe50e077270c4b7c926c3" "20210429115109.959":
+  package conf at 2( 10) + 0 on 4;
+file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "ALU.vhd" "3b8afa57aaf3fac81fc034b53b60be9a30dcb5c8" "20210429115109.959":
   entity alu at 5( 126) + 0 on 4;
   architecture behav of alu at 19( 441) + 0 on 4;
-file "/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/" "conf.vhd" "cf8e5bc0c1f3d1acbfe870c748d4d412cfa627b5" "20210426193657.690":
-  package conf at 2( 10) + 0 on 4;

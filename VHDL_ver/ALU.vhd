@@ -17,7 +17,7 @@ entity alu is
 end alu;
 
 architecture behav of alu is
-    constant log2memwidth : integer := integer((log2(real(32))));
+    constant log2memwidth : integer := integer((log2(real(memwidth))));
 begin
     process(data_i0,data_i1,alu_ctrl)
         variable d0,d1 : signed(memwidth-1 downto 0);
