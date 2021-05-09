@@ -4,6 +4,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 package conf is
     constant memwidth : integer := 32;
+    constant clock_period : time := 10 ns;
     type slv_arr is array (integer range <>) of std_logic_vector(memwidth-1 downto 0);
     type alu_opcode is 
         (add, slt, sltu, andd, orr, xorr,slll, srll, sub, sraa);

@@ -2,10 +2,12 @@
 --add, subtract, and, or, xor 
 --set-less-then, slt-unsigned 
 --shift-left-logical, srl, shift-right-arithmetric
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
+
 use work.conf.all;
 
 entity alu is
