@@ -1,4 +1,4 @@
---ALU module
+--integer ALU module
 --add, subtract, and, or, xor 
 --set-less-then, slt-unsigned 
 --shift-left-logical, srl, shift-right-arithmetric

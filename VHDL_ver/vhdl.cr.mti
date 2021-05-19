@@ -1,0 +1,89 @@
+/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mem.vhd {1 {vcom -work work -2008 -explicit -stats=none /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mem.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2021.1 Compiler 2021.02 Feb  2 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Loading package conf
+-- Compiling entity mem
+-- Compiling architecture rtl of mem
+
+} {} {}} /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/fifo_tb.vhd {2 {vcom -work work -2002 -explicit -stats=none /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/fifo_tb.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2021.1 Compiler 2021.02 Feb  2 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Loading package ENV
+** Warning: /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/fifo_tb.vhd(7): (vcom-1516) Package "STD.ENV" does not exist in this language version.
+-- Loading package conf
+-- Compiling entity fifo_tb
+-- Compiling architecture sim of fifo_tb
+-- Loading entity fifo
+** Warning: /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/fifo_tb.vhd(44): (vcom-1074) Non-locally static OTHERS choice is allowed only if it is the only choice of the only association.
+
+} {} {}} /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/mux_tb.vhd {2 {vcom -work work -2002 -explicit -stats=none /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/mux_tb.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2021.1 Compiler 2021.02 Feb  2 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Loading package ENV
+** Warning: /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/mux_tb.vhd(7): (vcom-1516) Package "STD.ENV" does not exist in this language version.
+-- Loading package conf
+-- Compiling entity mux_tb
+-- Compiling architecture sim of mux_tb
+-- Loading entity mux
+
+} {} {}} /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/ALU_tb.vhd {1 {vcom -work work -2008 -explicit -stats=none /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/ALU_tb.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2021.1 Compiler 2021.02 Feb  2 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Loading package ENV
+-- Loading package RandomBasePkg
+-- Loading package std_logic_textio
+-- Loading package SortListPkg_int
+-- Loading package NUMERIC_STD_UNSIGNED
+-- Loading package RandomPkg
+-- Loading package conf
+-- Compiling entity ALU_tb
+-- Compiling architecture sim of ALU_tb
+-- Loading entity alu
+
+} {} {}} /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mux.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mux.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2021.1 Compiler 2021.02 Feb  2 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Loading package conf
+-- Compiling entity mux
+-- Compiling architecture behav of mux
+
+} {} {}} /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/conf.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/conf.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2021.1 Compiler 2021.02 Feb  2 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling package conf
+
+} {} {}} /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/ALU.vhd {1 {vcom -work work -2008 -explicit -stats=none /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/ALU.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2021.1 Compiler 2021.02 Feb  2 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Loading package conf
+-- Compiling entity alu
+-- Compiling architecture behav of alu
+
+} {} {}}

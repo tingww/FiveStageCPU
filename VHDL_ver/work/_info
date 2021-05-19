@@ -1,0 +1,382 @@
+m255
+K4
+z2
+!s11e vcom 2021.1 2021.02, Feb  2 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+d/home/wutingwei/Bremen/Advanced digital system/Exercises/Lab02
+Ealu
+Z0 w1620556293
+Z1 DPx4 work 4 conf 0 22 dmzQWOD2HDaz>Ynm3GAoI2
+Z2 DPx4 ieee 9 math_real 0 22 gNk<PdFJ<XNPcfef`f?Z81
+Z3 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 24
+Z6 d/home/wutingwei/workspace/FiveStageCPU/VHDL_ver
+Z7 8/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/ALU.vhd
+Z8 F/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/ALU.vhd
+l0
+L13 1
+V]:_S6`jnoMMUHdz<R;KQ92
+!s100 TK95mZ@Ae=z`[6F;mSDS?2
+Z9 OV;C;2021.1;73
+33
+Z10 !s110 1621436156
+!i10b 1
+Z11 !s108 1621436156.000000
+Z12 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/ALU.vhd|
+Z13 !s107 /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/ALU.vhd|
+!i113 1
+Z14 o-work work -2008 -explicit
+Z15 tExplicit 1 CvgOpt 0
+Abehav
+R1
+R2
+R3
+R4
+R5
+Z16 DEx4 work 3 alu 0 22 ]:_S6`jnoMMUHdz<R;KQ92
+!i122 24
+l23
+L21 44
+VGUm87n>aKhd:Ki[YXhBfV0
+!s100 DN<SRS^UQ4426lzN<hM]Z0
+R9
+33
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 1
+R14
+R15
+Ealu_tb
+Z17 w1619465627
+R1
+Z18 DPx4 ieee 20 numeric_std_unsigned 0 22 L9z`>=>LNY9h8oAIomUKm3
+Z19 DPx4 ieee 16 std_logic_textio 0 22 8]8<fKiYoHe;_IDO3kmNH2
+Z20 DPx5 osvvm 15 sortlistpkg_int 0 22 K>gUg^GdI9Q>bJfjEe[So1
+Z21 DPx5 osvvm 13 randombasepkg 0 22 ^VH66K<SVNRTHjbdnk?0M0
+Z22 DPx5 osvvm 9 randompkg 0 22 ko^iiFe`U=?FQCKOn_]1X1
+Z23 DPx3 std 3 env 0 22 d?`1ck@NdeD@H3RZG7FgZ2
+R2
+R3
+R4
+R5
+!i122 26
+R6
+Z24 8/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/ALU_tb.vhd
+Z25 F/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/ALU_tb.vhd
+l0
+L14 1
+Vl6f567fV3V2T<BQnFg>`50
+!s100 N@?oNVc9K7FOXVlY3I6]?2
+R9
+33
+Z26 !s110 1621436191
+!i10b 1
+Z27 !s108 1621436190.000000
+Z28 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/ALU_tb.vhd|
+Z29 !s107 /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/ALU_tb.vhd|
+!i113 1
+R14
+R15
+Asim
+R16
+R1
+R18
+R19
+R20
+R21
+R22
+R23
+R2
+R3
+R4
+R5
+DEx4 work 6 alu_tb 0 22 l6f567fV3V2T<BQnFg>`50
+!i122 26
+l20
+L17 38
+VRz2a;aShb8oM^za@ECL332
+!s100 _O_VATL3K9h0lNV<bI><X3
+R9
+33
+R26
+!i10b 1
+R27
+R28
+R29
+!i113 1
+R14
+R15
+Pconf
+R3
+R4
+R5
+!i122 16
+w1620554520
+R6
+8/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/conf.vhd
+F/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/conf.vhd
+l0
+L5 1
+VdmzQWOD2HDaz>Ynm3GAoI2
+!s100 a>H]oHbO<N=ieiZK0GNK92
+R9
+32
+Z30 !s110 1621435929
+!i10b 1
+Z31 !s108 1621435929.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/conf.vhd|
+!s107 /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/conf.vhd|
+!i113 1
+Z32 o-work work -2002 -explicit
+R15
+Efifo
+Z33 w1621438367
+R1
+R2
+R3
+R4
+R5
+!i122 31
+R6
+Z34 8/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/fifo.vhd
+Z35 F/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/fifo.vhd
+l0
+L7 1
+VR1I7aoEBL?3SCXQm]ZRT^2
+!s100 6]gzRB0aG]R29zg<zI6kS2
+R9
+33
+Z36 !s110 1621438441
+!i10b 1
+Z37 !s108 1621438441.000000
+Z38 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/fifo.vhd|
+Z39 !s107 /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/fifo.vhd|
+!i113 1
+R14
+R15
+Artl
+R1
+R2
+R3
+R4
+R5
+Z40 DEx4 work 4 fifo 0 22 R1I7aoEBL?3SCXQm]ZRT^2
+!i122 31
+l27
+Z41 L23 48
+VHDTUL5kn7mWj=kzRF>2Ri1
+!s100 TAPz8eK^<z_1COobP1]K_1
+R9
+33
+R36
+!i10b 1
+R37
+R38
+R39
+!i113 1
+R14
+R15
+Efifo_tb
+Z42 w1621434926
+R1
+R23
+R2
+R3
+R4
+R5
+!i122 29
+R6
+Z43 8/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/fifo_tb.vhd
+Z44 F/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/fifo_tb.vhd
+l0
+Z45 L11 1
+VlFnm9D?;X`@I;[<;_<YS?3
+!s100 iV>eF8=0:8ehdfSTmzMHK0
+R9
+32
+Z46 !s110 1621436277
+!i10b 1
+Z47 !s108 1621436276.000000
+Z48 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/fifo_tb.vhd|
+Z49 !s107 /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/fifo_tb.vhd|
+!i113 1
+R32
+R15
+Asim
+R40
+R1
+R23
+R2
+R3
+R4
+R5
+DEx4 work 7 fifo_tb 0 22 lFnm9D?;X`@I;[<;_<YS?3
+!i122 29
+l27
+L14 127
+VC3bOI6^@;fe;D<;TdfHi=2
+!s100 IiFon>_KK4BH1ZcNN3O[20
+R9
+32
+R46
+!i10b 1
+R47
+R48
+R49
+!i113 1
+R32
+R15
+Emem
+Z50 w1620555841
+R1
+R2
+R3
+R4
+R5
+!i122 28
+R6
+Z51 8/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mem.vhd
+Z52 F/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mem.vhd
+l0
+L8 1
+VbZ2EE06gNhb58OYA9VUU;0
+!s100 B:ONI39Xb?1eX6l;^9Fol1
+R9
+33
+Z53 !s110 1621436246
+!i10b 1
+Z54 !s108 1621436246.000000
+Z55 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mem.vhd|
+Z56 !s107 /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mem.vhd|
+!i113 1
+R14
+R15
+Artl
+R1
+R2
+R3
+R4
+R5
+DEx4 work 3 mem 0 22 bZ2EE06gNhb58OYA9VUU;0
+!i122 28
+l33
+L30 31
+VUNl`eOjSH6ZZ?Ua`;;C>D1
+!s100 bB6JTDR5hII7aiCDdBgWN0
+R9
+33
+R53
+!i10b 1
+R54
+R55
+R56
+!i113 1
+R14
+R15
+Emux
+Z57 w1619697406
+R1
+R2
+R3
+R4
+R5
+!i122 19
+R6
+Z58 8/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mux.vhd
+Z59 F/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mux.vhd
+l0
+R45
+VcXzT0a=`o`C3m[Jj2giF93
+!s100 Vml?H84BSVziGOVkCW9U>2
+R9
+32
+R30
+!i10b 1
+R31
+Z60 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mux.vhd|
+Z61 !s107 /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/mux.vhd|
+!i113 1
+R32
+R15
+Abehav
+R1
+R2
+R3
+R4
+R5
+Z62 DEx4 work 3 mux 0 22 cXzT0a=`o`C3m[Jj2giF93
+!i122 19
+l24
+L22 5
+V[b_UT]77U@A2BTacenIj^1
+!s100 W`kcRg0FiF]]86F<SQlP72
+R9
+32
+R30
+!i10b 1
+R31
+R60
+R61
+!i113 1
+R32
+R15
+Emux_tb
+Z63 w1619695735
+R1
+R23
+R2
+R3
+R4
+R5
+!i122 22
+R6
+Z64 8/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/mux_tb.vhd
+Z65 F/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/mux_tb.vhd
+l0
+R45
+VY?Hazc5@E4m^D?Fa:9j[T0
+!s100 98`eaGh[?g29X_WYR`V8L3
+R9
+32
+R30
+!i10b 1
+R31
+Z66 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/mux_tb.vhd|
+Z67 !s107 /home/wutingwei/workspace/FiveStageCPU/VHDL_ver/testbench/mux_tb.vhd|
+!i113 1
+R32
+R15
+Asim
+R62
+R1
+R23
+R2
+R3
+R4
+R5
+DEx4 work 6 mux_tb 0 22 Y?Hazc5@E4m^D?Fa:9j[T0
+!i122 22
+l21
+L14 33
+Vo6oi>XQ?=SHE7KEDgFckj3
+!s100 m;[>?IE:;=6`EjTl@2@=51
+R9
+32
+R30
+!i10b 1
+R31
+R66
+R67
+!i113 1
+R32
+R15
