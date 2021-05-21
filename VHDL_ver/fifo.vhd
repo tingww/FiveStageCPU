@@ -1,4 +1,4 @@
---fifo with n-1 slots
+--fifo with n slots memwidth
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -26,16 +26,31 @@ architecture rtl of fifo is
     signal head,tail : unsigned(integer(ceil(log2(real(n))))-1 downto 0);
     type ring_buffer_type is array (0 to n-1) of std_logic_vector(memwidth-1 downto 0);
     signal ring_buffer : ring_buffer_type;
+    signal almost_full, almost_empty : std_logic := '0';
 begin
     HEAD_PROC : process(clk,rst)
         variable one : unsigned(integer(ceil(log2(real(n))))-1 downto 0) := (0 =>'1', others => '0');
     begin
         if rst then
             head <= (others => '0');
+            full <= '0';
         elsif rising_edge(clk) then
             if w_en and (not full) then
                 ring_buffer(to_integer(head)) <= d_in;
-                head <= head + one;
+            end if;
+            --could be in another clk process
+            if almost_full then
+                if w_en then
+                    full <= '1';
+                end if;
+                if r_en and full then
+                    full <= '0';
+                    head <= head + one;
+                end if;
+            else
+                if w_en then
+                    head <= head + one;
+                end if;
             end if;
         end if;
     end process;
@@ -50,22 +65,36 @@ begin
                 d_out <= ring_buffer(to_integer(tail));
                 tail <= tail + one;
             end if;
+            if almost_empty then
+                if r_en then
+                    empty <= '1';
+                end if;
+                if w_en and empty then
+                    empty <= '0';
+                    tail <= tail + one;
+                end if;
+            else
+                if r_en then
+                    tail <= tail + one;
+                end if;
+            end if;
         end if;
     end process;
 
+    --empty and almost_full update combinationally, full updates sequentially
     COMB_PROC : process(head,tail)
         variable one : unsigned(integer(ceil(log2(real(n))))-1 downto 0) := (0 =>'1', others => '0');
     begin
         if head = tail then
-            empty <= '1';
+            almost_empty <= '1';
         else 
-            empty <= '0';
+            almost_empty <= '0';
         end if;
 
         if (tail-one) = head then
-            full <= '1';
+            almost_full <= '1';
         else
-            full <= '0';
+            almost_full <= '0';
         end if;
     end process;
 

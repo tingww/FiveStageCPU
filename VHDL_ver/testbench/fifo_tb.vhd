@@ -103,10 +103,24 @@ begin
         r_en <= '1';
 
         wait for clk_period;
-        r_en <= '1';
+        w_en <= '1';
+        d_in <= std_logic_vector(unsigned(d_in)+one);
+
+        wait for clk_period;
+        w_en <= '1';
+        d_in <= std_logic_vector(unsigned(d_in)+one);
+
+        wait for clk_period;
+        w_en <= '1';
+        d_in <= std_logic_vector(unsigned(d_in)+one);
 
         wait for clk_period;
         r_en <= '1';
+        d_in <= std_logic_vector(unsigned(d_in)+one);
+
+        wait for clk_period;
+        r_en <= '1';
+        d_in <= std_logic_vector(unsigned(d_in)+one);
 
         wait for clk_period;
         r_en <= '1';
