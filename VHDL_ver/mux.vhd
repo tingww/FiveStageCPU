@@ -19,7 +19,7 @@ entity mux is
     );
 end mux;
 
-architecture behav of mux is
+architecture rtl of mux is
 
 begin
     data_o <= data_i(to_integer(unsigned(sel))+1);

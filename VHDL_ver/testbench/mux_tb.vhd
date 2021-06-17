@@ -21,7 +21,7 @@ architecture sim of mux_tb is
 begin
 
 
-    DUT : entity work.mux(behav)
+    DUT : entity work.mux(rtl)
     generic map(
         n => n
     )

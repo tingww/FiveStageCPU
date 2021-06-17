@@ -18,7 +18,7 @@ entity alu is
     );
 end alu;
 
-architecture behav of alu is
+architecture rtl of alu is
     constant log2memwidth : integer := integer((log2(real(memwidth))));
 begin
     process(data_i0,data_i1,alu_ctrl)

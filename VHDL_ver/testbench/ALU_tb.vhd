@@ -18,7 +18,7 @@ architecture sim of ALU_tb is
     signal data_i0, data_i1, data_o : std_logic_vector(memwidth-1 downto 0) := (others => '0');
     signal alu_ctrl : alu_opcode;
 begin
-    DUT : entity work.ALU(behav)
+    DUT : entity work.ALU(rtl)
     port map (
         data_i0,data_i1,alu_ctrl,data_o
     );
