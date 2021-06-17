@@ -37,22 +37,31 @@ architecture rtl of cache is
     signal tag : std_logic_vector(tagfield-1 downto 0);
     signal index : integer;
     signal wordoffset : std_logic_vector(blockfield-1 downto 0);
+    signal hit_nxt, dirty_nxt : std_logic;
+    signal r_data_nxt : std_logic_vector(memwidth-1 downto 0);
 begin
     tag <= address(memwidth-1 downto memwidth-tagfield);
     index <= to_integer(unsigned( address(memwidth-tagfield-1 downto memwidth-tagfield-indexfield) ));
     wordoffset <= address(blockfield+2-1 downto 2);
 
-    ready_proc: process(clk, rst)
+    seq: process(clk, rst)
     begin
         if rst = '1' then
             cache_ready <='0';
+            hit <= '0';
+            dirty <= '0';
+            r_data <= (r_data'length downto 0 => '0');
         elsif rising_edge(clk) then
-            if cache_valid= '1' and cache_ready='1' then    --at least one clock_period delay, cache_ready hold high for one clock
+            if cache_valid= '1' and cache_ready='1' then    --one clock_period delay, cache_ready hold high for one clock
                 cache_ready <= '0';
-                cache_ready <= '1' after cachemem_delay;
+            else
+                cache_ready <= '1';
             end if;
+            hit <= hit_nxt;
+            dirty <= dirty_nxt;
+            r_data <= r_data_nxt;
         end if;
-    end process ready_proc;
+    end process seq;
 
     PROC : process(all)
     begin
@@ -60,14 +69,14 @@ begin
             --cache is busy
             if burst='0' then       --read/write/invalidate mode
                 if cachemem(index)(linesize-1-1-1 downto linesize-1-1-tagfield) = tag and cachemem(index)(linesize-1) = '1' then    --valid hit
-                    hit <= '1';
-                    dirty <= '0';
+                    hit_nxt <= '1';
+                    dirty_nxt <= '0';
                     if rewr = '0' then --read
                         case wordoffset is
-                            when "11" => r_data <= cachemem(index)(memwidth*4-1 downto memwidth*3);          ---NOT Parameterized---
-                            when "10" => r_data <= cachemem(index)(memwidth*3-1 downto memwidth*2); 
-                            when "01" => r_data <= cachemem(index)(memwidth*2-1 downto memwidth*1); 
-                            when "00" => r_data <= cachemem(index)(memwidth*1-1 downto memwidth*0);
+                            when "11" => r_data_nxt <= cachemem(index)(memwidth*4-1 downto memwidth*3);          ---NOT Parameterized---
+                            when "10" => r_data_nxt <= cachemem(index)(memwidth*3-1 downto memwidth*2); 
+                            when "01" => r_data_nxt <= cachemem(index)(memwidth*2-1 downto memwidth*1); 
+                            when "00" => r_data_nxt <= cachemem(index)(memwidth*1-1 downto memwidth*0);
                             when others => assert false
                                 report "wordoffset incorrect value"
                                 severity failure;
@@ -89,19 +98,19 @@ begin
                         end if;                        
                     end if;
                 elsif cachemem(index)(linesize-1) = '1' and cachemem(index)(linesize-2) = '1' then  --valid miss dirty
-                    hit <= '0';
-                    dirty <= '1';
+                    hit_nxt <= '0';
+                    dirty_nxt <= '1';
                 else
-                    hit <= '0';
-                    dirty <= '0';
+                    hit_nxt <= '0';
+                    dirty_nxt <= '0';
                 end if;
             elsif burst='1' then    --read/allocate mode
                 if rewr= '0'then    --burst mode(same as read mode), in state writeback
                     case wordoffset is
-                        when "11" => r_data <= cachemem(index)(memwidth*4-1 downto memwidth*3);          ---NOT Parameterized---
-                        when "10" => r_data <= cachemem(index)(memwidth*3-1 downto memwidth*2); 
-                        when "01" => r_data <= cachemem(index)(memwidth*2-1 downto memwidth*1); 
-                        when "00" => r_data <= cachemem(index)(memwidth*1-1 downto memwidth*0);
+                        when "11" => r_data_nxt <= cachemem(index)(memwidth*4-1 downto memwidth*3);          ---NOT Parameterized---
+                        when "10" => r_data_nxt <= cachemem(index)(memwidth*3-1 downto memwidth*2); 
+                        when "01" => r_data_nxt <= cachemem(index)(memwidth*2-1 downto memwidth*1); 
+                        when "00" => r_data_nxt <= cachemem(index)(memwidth*1-1 downto memwidth*0);
                         when others => assert false
                             report "wordoffset incorrect value"
                             severity failure;
