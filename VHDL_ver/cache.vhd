@@ -46,7 +46,7 @@ begin
 
     seq: process(clk, rst)
     begin
-        if rst = '1' then
+        if rst = rst_val then
             cache_ready <='0';
             hit <= '0';
             dirty <= '0';

@@ -36,12 +36,19 @@ architecture rtl of cachectrl is
 
     type state_type is (idle, acces, allocate, writeback);
     signal state,nstate : state_type;
+    signal u_counter, c_counter, wb_counter : unsigned(blockfield-1 downto 0);
+    signal u_ctr_en, u_ctr_start, u_ctr_incr, c_ctr_en, c_ctr_start, c_ctr_incr, wb_ctr_en, wb_ctr_start, wb_ctr_incr : std_logic;
+    signal u_burst_last, c_burst_last, wb_burst_last : std_logic;
+    signal ready_nxt, u_rewr_nxt, u_valid_nxt : std_logic;                      --output registers, registers of r_data and u_w_data are assumed in the module
+    signal u_address_nxt : std_logic_vector(memwidth-1 downto 0);
+    --connection to cache
     signal cache_hit, cache_ready, cache_dirty ,cache_rewr, cache_burst, cache_invalidate: std_logic;
     signal cache_address, cache_w_data, cache_r_data: std_logic_vector(memwidth-1 downto 0);
+    --connection to write buffer
     signal wbuffer_ready, wbuffer_valid, wbuffer_rewr, wbuffer_full, wbuffer_empty, wbuffer_idle : std_logic;
     signal wbuffer_address, wbuffer_data, wbuffer_r_data : std_logic_vector(memwidth-1 downto 0);
 
-    signal u_counter, c_counter : unsigned(blockfield-1 downto 0);
+    
 begin
     cache0: entity work.cache port map(
         cache_valid => cache_valid,
@@ -72,12 +79,27 @@ begin
 
     state_proc: process(clk, rst)
     begin
-        if rst = '1' then
+        if rst = rst_val then
             state <= idle;
         elsif rising_edge(clk) then
             state <= nstate;            
         end if;
     end process state_proc;
+    
+    seq: process(clk, rst)
+    begin
+        if rst = rst_val then
+            ready <= '1';
+            u_rewr <= '0';
+            u_valid <= '0';
+            u_address <= (memwidth-1 downto 0 => '0');
+        elsif rising_edge(clk) then
+            ready <= ready_nxt;
+            u_rewr <= u_rewr_nxt;
+            u_valid <= u_valid_nxt;
+            u_address <= u_address_nxt;
+        end if;
+    end process seq;
 
     state_transition: process(all)
     begin
@@ -86,7 +108,7 @@ begin
                 if valid = '1' then
                     nstate <= acces;
                 else
-                    nstate <= idle;
+                    nstate <= state;
                 end if;
 
             when acces =>
@@ -97,21 +119,21 @@ begin
                 elsif cache_hit='0' and cache_ready='1' and cache_dirty='1' and wbuffer_idle='1' then  --valid,miss,dirty
                     nstate <= writeback;
                 else
-                    nstate <= acces;
+                    nstate <= state;
                 end if;
 
             when allocate =>
-                if cache_burst_done = '1'then    --when finish allocating
+                if c_burst_last = '1' and u_burst_done='1' and cache_ready='1' then    --when finish allocating
                     nstate <= acces;
                 else
-                    nstate <= allocate;
+                    nstate <= state;
                 end if;
 
             when writeback =>
-                if cache_burst_done = '1' then
+                if c_burst_last = '1' and wb_burst_done='1' and wb_ready='1' then
                     nstate <= allocate;
                 else
-                    nstate <= writeback;
+                    nstate <= state;
                 end if;
         
             when others =>
@@ -153,7 +175,7 @@ begin
                 cache_w_data <= u_r_data;
                 cache_rewr <= '1';
                 cache_burst <= '1';
-                cache_valid <= u_ready when (u_counter /= 0) else '0';
+                cache_valid <= u_ready when (u_counter or c_counter) /= (u_counter'length downto 0 => '0') else '0';
 
                 wbuffer_valid <= '0';
 
@@ -161,13 +183,13 @@ begin
                 ready <= '0';
                 u_valid <= '0';
 
-                cache_address <= address;   --read cache to write buffer, burst length = block size
+                cache_address <= (address(memwidth-1 downto 4),c_counter,others => '0');   --read cache to write buffer, burst length = block size
                 cache_rewr <= '0';
                 cache_burst <= '1';
-                cache_valid <= '1';
+                cache_valid <= wbuffer_ready when wb_burst_done='0' else '0';
 
-                wbuffer_valid <= cache_ready;
-                wbuffer_address <= address;
+                wbuffer_valid <= wbuffer_ready when (wb_counter or c_counter) /= (wb_counter'length downto 0 => '0') else '0';;
+                wbuffer_address <= (address(memwidth-1 downto 4),wb_counter,others => '0');
                 wbuffer_w_data <= cache_r_data;
                 wbuffer_rewr <= '1';
         
@@ -178,60 +200,92 @@ begin
         end case;
     end process control_signal;
 
-    upstream_counter: process(clk, rst, cache_burst)     --counts numbers of (u_valid and u_ready) when bursting
-        variable one : unsigned(blockfield-1 downto 0) := ( 0=>'1' ,others => '0');
-    begin
-        if rst = '1' then
-            u_counter <= (others => '0');
-        elsif rising_edge(cache_burst) then
-            u_counter <= (others => '0');
-        elsif rising_edge(clk) then     
-            if cache_burst='1' and u_ready='1' and u_valid='1'then
-                u_counter <= u_counter+ one;
-            end if;
-        end if;
-    end process upstream_counter;
+    upstream_mem_counter : conditional_counter(clk, rst, u_ctr_en, u_ctr_start, u_counter); --counts numbers of (u_valid and u_ready) when enabled
+    cache_counter : conditional_counter(clk, rst, c_ctr_en, c_ctr_start, c_counter);
+    writebuffer_counter : conditional_counter(clk, rst, wb_ctr_en, wb_ctr_start, wb_counter);
 
-    u_burst_done_proc : process(clk, rst)
-        variable allone : unsigned(blockfield-1 downto 0) := (others => '1');
+    if state/=allocate and nstate=allocate then
+        u_ctr_start <= '1';
+    else
+        u_ctr_start <= '0';
+    end if;
+
+    if u_ctr_en='1' and u_ready='1' and u_valid='1' then
+        u_ctr_incr <= '1';
+    else
+        u_ctr_incr <= '0';
+    end if;
+
+    if state=acces and (nstate=writeback or nstate=allocate) then
+        c_ctr_start <= '1';
+    else
+        c_ctr_start <= '0';
+    end if;
+
+    if cache_burst='1' and cache_ready='1' and cache_valid='1' then
+        c_ctr_incr <= '1';
+    else
+        c_ctr_incr <= '0';
+    end if;
+
+    if state=acces and nstate=writeback then
+        wb_ctr_start <= '1';
+    else
+        wb_ctr_start <= '0';
+    end if;
+
+    if wb_ctr_en='1' and wbuffer_ready='1' and wbuffer_valid='1' then
+        wb_ctr_incr <= '1';
+    else
+        wb_ctr_incr <= '0';
+    end if;
+
+    u_burst_last_proc : process(clk, rst)
     begin
-        if cache_burst = '1' then
+        if rst = rst_val then
+            u_burst_last <= '0';
+        elsif u_ctr_en = '1' then
             if rising_edge(clk) then
-                if (u_valid='1' and u_ready='1' and u_counter=allone) then
-                    u_burst_done <= '1';
+                if (u_valid='1' and u_ready='1' and u_counter=(u_counter'length downto 0 => '1')) then
+                    u_burst_last <= '1';
                 end if;
             end if;
         else
-            u_burst_done <= '0';
+            u_burst_last <= '0';
         end if;
-    end process u_burst_done_proc;
+    end process u_burst_last_proc;
 
-    cache_counter: process(clk, rst, cache_burst)
-        variable one : unsigned(blockfield-1 downto 0) := ( 0=>'1' ,others => '0');
+    wb_burst_last_proc : process(clk, rst)
     begin
-        if rst = '1' then
-            c_counter <= (others => '0');
-        elsif rising_edge(cache_burst) then
-            c_counter <= (others => '0');
-        elsif rising_edge(clk) then     
-            if cache_burst='1' and cache_ready='1' and cache_valid='1'then
-                c_counter <= c_counter+ one;
+        if rst = rst_val then
+            wb_burst_last <= '0';
+        elsif wb_ctr_en = '1' then
+            if rising_edge(clk) then
+                if (wb_valid='1' and wb_ready='1' and wb_counter=(wb_counter'length downto 0 => '1')) then
+                    wb_burst_last <= '1';
+                end if;
             end if;
+        else
+            wb_burst_last <= '0';
         end if;
-    end process cache_counter;
+    end process wb_burst_last_proc;
 
-    c_burst_done_proc : process(all)
+
+    c_burst_last_proc : process(clk,rst)
         variable allone : unsigned(blockfield-1 downto 0) := (others => '1');
     begin
-        if cache_burst = '1' then
+        if rst = rst_val then
+            c_burst_last <= '0';
+        elsif cache_burst = '1' then
             if rising_edge(clk) then
                 if (cache_valid='1' and cache_ready='1' and c_counter=allone) then
-                    burst_done <= '1';
+                    c_burst_last <= '1';
                 end if;
             end if;
         else
-            burst_done <= '0';
+            c_burst_last <= '0';
         end if;
-    end process c_burst_done_proc;
+    end process c_burst_last_proc;
+
 
 end architecture;
